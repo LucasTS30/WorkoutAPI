@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WorkoutAPI.Data.Contexts;
 
@@ -11,9 +12,11 @@ using WorkoutAPI.Data.Contexts;
 namespace WorkoutAPI.Migrations
 {
     [DbContext(typeof(WorkoutDbContext))]
-    partial class WorkoutDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241113234640_RenameTables")]
+    partial class RenameTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

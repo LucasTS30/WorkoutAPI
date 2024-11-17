@@ -11,4 +11,10 @@ public class WorkoutDbContext : DbContext {
     public DbSet<Exercise> Exercises { get; set; }
     public DbSet<Training> Trainings { get; set; }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Exercise>().ToTable("Exercise");
+        modelBuilder.Entity<Training>().ToTable("Training");
+    }
+
 }

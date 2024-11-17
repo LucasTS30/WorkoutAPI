@@ -7,8 +7,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+var connectionString =
+    builder.Configuration.GetConnectionString("DefaultConnection")
+        ?? throw new InvalidOperationException("Connection string"
+        + "'DefaultConnection' not found.");
+
 builder.Services.AddDbContext<WorkoutDbContext>(options => {
-    options.UseSqlServer(builder.Configuration.GetConnectionString("Default"));
+    options.UseSqlServer(connectionString);
 });
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -22,6 +27,11 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+else
+{
+    app.UseDeveloperExceptionPage();
+    app.UseMigrationsEndPoint();
 }
 
 app.UseHttpsRedirection();
